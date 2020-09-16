@@ -17,9 +17,12 @@
                         </div>
                         <div class="right">
                             <h3 class="">{{ $product->title }}</h3>
-                            <p class="description">
+                            <p class="price">
                                 {{ $product->fee }}円
                             </p>
+                            <a class="status" href="{{ url('/review') }}">
+                                <input type="submit" value="未読了" class="bg-danger text-white">
+                            </a>
                         </div>
                     </div>
                 </div>

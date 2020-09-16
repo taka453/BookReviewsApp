@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use App\create;
+use App\review;
 
 class ProductController extends Controller
 {
@@ -39,5 +40,10 @@ class ProductController extends Controller
         Product::insert($data);
 
         return redirect('/');
+    }
+
+    public function review()
+    {
+        return view('review');
     }
 }
