@@ -1,9 +1,5 @@
 @extends('layouts.app')
 
-@section('css')
-    <link href="{{ asset('css/top.css') }}" rel="stylesheet">
-@endsection
-
 @section('content')
 <div class="container-fluid">
     <div class="mx-auto" style="max: 1200px">
@@ -14,19 +10,19 @@
                     <div class="card-body d-flex flex-row flex-wrap">
                         <div class="left">
                             @if(!empty($product->image))
-                                <div class="image-wrapper"><img class="book-image" src="{{ asset('storage/'. $product->image) }}"></div>
+                                <div class="image-wrapper"><img class="book-image" src="{{ asset('storage/images/'.$product->image) }}"></div>
                             @else
                                 <div class="image-wrapper"><img class="book-image" src="{{ asset('images/dummy.png') }}"></div>
                             @endif
                         </div>
                         <div class="right">
                             <h3 class="">{{ $product->title }}</h3>
-                            <p class="fee">
+                            <p class="price">
                                 {{ $product->fee }}円
                             </p>
-                            <a class="status" href="{{ url('/review') }}">
-                                <input type="submit" value="未読了" class="bg-danger text-white">
-                            </a>
+                            <p class="comment">
+                                {{ $product->comment }}
+                            </p>
                         </div>
                     </div>
                 </div>

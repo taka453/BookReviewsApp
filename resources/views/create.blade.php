@@ -22,11 +22,11 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="form-group">
-                        <label>タイトル</label>
+                            <label>タイトル</label>
                             <input type="text" class="form-control" name="title" placeholder="タイトルを入力">
-                            </div>
-                            <div class="form-group">
-                        <label>金額</label>
+                        </div>
+                        <div class="form-group">
+                            <label>金額</label>
                             <input type="text" class="form-control" name="fee" placeholder="金額を入力">
                         </div>
                         <div class="form-group">

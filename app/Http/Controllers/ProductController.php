@@ -3,15 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\Read;
 use Illuminate\Http\Request;
-use App\create;
-use App\review;
 
 class ProductController extends Controller
 {
     public function index()
     {
-        $products = Product::where('product_id', 1)->orderBy('created_at', 'DESC')->paginate(3);
+        $products = Product::where('user_id', 1)->orderBy('created_at', 'DESC')->paginate(3);
         return view('product', compact('products'));
     }
 
@@ -22,7 +21,6 @@ class ProductController extends Controller
 
     public function store(Request $request)
     {
-        $post = $request->all();
 
         $validatedData = $request->validate([
             'title' => 'required|max: 255',
@@ -31,10 +29,18 @@ class ProductController extends Controller
         ]);
 
         if($request->hasFile('image')) {
-            $request->file('image')->store('/public/images');
-            $data = ['product_id' => \Auth::id(), 'title' => $post['title'], 'fee' => $post['fee'], 'image' => $request->file('image')->hashName()];
+            $path = $request->file('image')->store('images', ['disk' => 'public']);
+
+            $data = [
+                'user_id' => \Auth::id(),
+                'title' => $validatedData['title'],
+                'fee' => $validatedData['fee'],
+                'image' => $path
+            ];
         } else {
-            $data = ['product_id' => \Auth::id(), 'title' => $post['title'], 'fee' => $post['fee']];
+            $data = ['user_id' => \Auth::id(),
+            'title' => $validatedData['title'],
+            'fee' => $validatedData['fee']];
         }
 
         Product::insert($data);
@@ -44,6 +50,22 @@ class ProductController extends Controller
 
     public function review()
     {
-        return view('review');
+        $products = Product::where('user_id', 1)->first();
+        return view('review', compact('products'));
+    }
+
+    public function read(Request $request)
+    {
+        // dd($request->all());
+        // throw new \Exception('test');
+        $validatedData = $request->validate([
+            'comment' => 'required|max: 500',
+        ]);
+        $data = ['comment' => $validatedData['comment']];
+
+        Product::update($data);
+
+        $products = Product::where('user_id', 1)->orderBy('created_at', 'DESC')->paginate(3);
+        return view('read', compact('products'));
     }
 }

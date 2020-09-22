@@ -8,12 +8,21 @@
 
         <div class="row justify-content-center container">
         <div class="col-md-10">
-            <form method="POST" action="{{route('review')}}">
+            @if ($errors->any())
+                <div class="alert alert-danger">
+                    <ul>
+                        @foreach ($errors->all() as $error)
+                            <li>{{ $error }}</li>
+                        @endforeach
+                    </ul>
+                </div>
+            @endif
+            <form method="post" action="{{ route('read') }}">
                 @csrf
                 <div class="card">
                     <div class="card-body text-center">
                         <div class="form-group">
-                            <textarea name="review" id="" cols="100" rows="10" placeholder="ここに感想を記入してください"></textarea>
+                            <textarea name="comment" id="" cols="100" rows="10" placeholder="ここに感想を記入してください"></textarea>
                         </div>
                         <input type="submit" class="btn btn-primary" value="感想を登録する">
                     </div>
