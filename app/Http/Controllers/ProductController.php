@@ -49,11 +49,11 @@ class ProductController extends Controller
 
     public function review()
     {
-        $products = Product::where('user_id', 1)->first();
+        $products = Product::where('id', $id)->first();
         return view('review', compact('products'));
     }
 
-    public function read(Request $request)
+    public function read(Request $request, $id)
     {
         // dd($request->all());
         // throw new \Exception('test');
