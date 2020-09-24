@@ -47,13 +47,12 @@ class ProductController extends Controller
         return redirect('/');
     }
 
-    public function review()
+    public function review(Product $product)
     {
-        $products = Product::where('id', $id)->first();
-        return view('review', compact('products'));
+        return view('review', compact('product'));
     }
 
-    public function read(Request $request, $id)
+    public function update(Request $request, Product $product)
     {
         // dd($request->all());
         // throw new \Exception('test');
