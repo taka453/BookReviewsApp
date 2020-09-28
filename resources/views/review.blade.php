@@ -24,7 +24,7 @@
                         <div class="form-group">
                             <textarea name="comment" id="" cols="100" rows="10" placeholder="ここに感想を記入してください"></textarea>
                         </div>
-                        <input type="hidden" name="id" value="$product->id">
+                        <input type="hidden" name="id" value="{{ $product->id }}">
                         <input type="submit" class="btn btn-primary" value="感想を登録する">
                     </div>
                 </div>

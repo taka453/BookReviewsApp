@@ -11,8 +11,8 @@
 |
 */
 
-Route::get('/', 'ProductController@index');
 Auth::routes();
+Route::get('/', 'ProductController@index')->name('index');
 
 Route::group(['middleware' => 'auth'], function() {
     Route::get('/create', 'ProductController@create')->name('create');

@@ -47,23 +47,24 @@ class ProductController extends Controller
         return redirect('/');
     }
 
-    public function review(Product $product)
+    public function review(Request $request, Product $product)
     {
+        $products = Product::where('user_id', 1)->orderBy('created_at', 'DESC')->paginate(3);
         return view('review', compact('product'));
     }
 
-    public function update(Request $request, Product $product)
+    public function update(Request $request)
     {
         // dd($request->all());
         // throw new \Exception('test');
         $validatedData = $request->validate([
             'comment' => 'required|max: 500',
         ]);
-        $data = ['comment' => $validatedData['comment']];
+        $data = [
+            'comment' => $validatedData['comment']
+        ];
 
         Product::update($data);
-
-        $products = Product::where('user_id', 1)->orderBy('created_at', 'DESC')->paginate(3);
-        return view('read', compact('products'));
+        return redirect('/read');
     }
 }
