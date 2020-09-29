@@ -49,22 +49,25 @@ class ProductController extends Controller
 
     public function review(Request $request, Product $product)
     {
-        $products = Product::where('user_id', 1)->orderBy('created_at', 'DESC')->paginate(3);
+        $products = $request->query('product');
+        $product = Product::find($products);
         return view('review', compact('product'));
     }
 
-    public function update(Request $request)
+    public function update(Request $request, Product $product)
     {
         // dd($request->all());
         // throw new \Exception('test');
+
         $validatedData = $request->validate([
+            'id' => 'required',
             'comment' => 'required|max: 500',
         ]);
-        $data = [
-            'comment' => $validatedData['comment']
-        ];
 
-        Product::update($data);
-        return redirect('/read');
+        $products = Product::find($validatedData['id']);
+        $products->comment = $validatedData['comment'];
+        $products->save();
+
+        return view('read', compact('products'));
     }
 }

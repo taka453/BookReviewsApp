@@ -17,7 +17,7 @@
                     </ul>
                 </div>
             @endif
-            <form method="post" action="{{ route('update', $product->id) }}">
+            <form method="post" action="{{ route('update') }}">
                 @csrf
                 <div class="card">
                     <div class="card-body text-center">
@@ -25,7 +25,7 @@
                             <textarea name="comment" id="" cols="100" rows="10" placeholder="ここに感想を記入してください"></textarea>
                         </div>
                         <input type="hidden" name="id" value="{{ $product->id }}">
-                        <input type="submit" class="btn btn-primary" value="感想を登録する">
+                        <button type="submit" class="btn btn-primary">感想を登録する</button>
                     </div>
                 </div>
             </form>

@@ -24,9 +24,7 @@
                             <p class="fee">
                                 {{ $product->fee }}円
                             </p>
-                            <a class="status" href="{{ route('review' , ['product' => $product]) }}">
-                                <input type="submit" value="未読了" class="bg-danger text-white">
-                            </a>
+                            <a class="status btn btn-danger" href="{{ route('review' , ['product' => $product]) }}">未読了</a>
                         </div>
                     </div>
                 </div>
