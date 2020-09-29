@@ -67,8 +67,13 @@ class ProductController extends Controller
         $product = Product::find($validatedData['id']);
         $product->comment = $validatedData['comment'];
         $product->save();
-        $products = Product::where('user_id', 1)->orderBy('created_at', 'DESC')->paginate(3);
 
+        return redirect('/read');
+    }
+
+    public function read()
+    {
+        $products = Product::where('user_id', 1)->orderBy('created_at', 'DESC')->paginate(3);
         return view('read', compact('products'));
     }
 }

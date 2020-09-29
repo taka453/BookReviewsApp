@@ -42,12 +42,15 @@
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
                         <li class="nav-item">
+                            <a href="{{ route('read') }}" class='nav-link'>積読解消ページ</a>
+                        </li>
+                        <li class="nav-item">
                             <a href="{{ route('create') }}" class='nav-link'>積読を登録する</a>
                         </li>
                         @guest
-                            <li class="nav-item">
+                            < class="nav-item">
                                 <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                            </li>
+                            </>
                             @if (Route::has('register'))
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>

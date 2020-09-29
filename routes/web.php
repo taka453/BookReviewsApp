@@ -13,6 +13,7 @@
 
 Auth::routes();
 Route::get('/', 'ProductController@index')->name('index');
+Route::get('/read', 'ProductController@read')->name('read');
 
 Route::group(['middleware' => 'auth'], function() {
     Route::get('/create', 'ProductController@create')->name('create');
