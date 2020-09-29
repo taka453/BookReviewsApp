@@ -64,9 +64,10 @@ class ProductController extends Controller
             'comment' => 'required|max: 500',
         ]);
 
-        $products = Product::find($validatedData['id']);
-        $products->comment = $validatedData['comment'];
-        $products->save();
+        $product = Product::find($validatedData['id']);
+        $product->comment = $validatedData['comment'];
+        $product->save();
+        $products = Product::where('user_id', 1)->orderBy('created_at', 'DESC')->paginate(3);
 
         return view('read', compact('products'));
     }
