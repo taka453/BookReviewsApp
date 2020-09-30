@@ -59,7 +59,7 @@
                                                 </span>
                                             </button>
                                         </div>
-                                        <form method="POST" action="{{ route('destroy',  ['product' => $product]) }}">
+                                        <form method="POST" action="{{ route('destroy',  ['product' => $product]) }}" enctype="multipart/form-data">
                                             @csrf
                                             <div class="modal-body">
                                                 {{ $product->title }}を削除します。よろしいですか？

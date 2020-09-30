@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
@@ -47,9 +48,38 @@ class ProductController extends Controller
         return redirect('/');
     }
 
-    public function edit(Product $product)
+    public function edit(Request $request, Product $product)
     {
-        return view('edit', ['product' => $product]);
+        $products = $request->query('product');
+        $product = Product::find($products);
+        return view('edit', compact('product'));
+    }
+
+    public function update(Request $request, Product $product)
+    {
+        $validatedData = $request->validate([
+            'id' => 'required',
+            'title' => 'required|max: 255',
+            'fee' => 'required',
+            'image' => 'mimes:jpeg,png,jpg,gif,svg|max:2048',
+        ]);
+
+            // $path = $request->file('image')->store('images', ['disk' => 'public']);
+
+            $product = Product::find($validatedData['id']);
+            $product->title = $validatedData['title'];
+            $product->fee = $validatedData['fee'];
+
+            if($request->hasFile($validatedData['image'])) {
+                Storage::delete('public/images/' . $product->image);
+                $path = $request->file('image')->store('images', ['disk' => 'public']);
+                $product->image = basename($path);
+                $product->save();
+            }
+
+            $product->save();
+
+            return redirect('/');
     }
 
     public function review(Request $request, Product $product)
@@ -59,7 +89,7 @@ class ProductController extends Controller
         return view('review', compact('product'));
     }
 
-    public function update(Request $request, Product $product)
+    public function updateComment(Request $request, Product $product)
     {
         // dd($request->all());
         // throw new \Exception('test');

@@ -33,6 +33,7 @@
                             <label for="file1">本のサムネイル</label>
                             <input type="file" id="file1" name="image" class="form-control-file">
                         </div>
+                        <input type="hidden" name="id" value="{{ $product->id }}">
                         <input type="submit" class="btn btn-primary" value="更新する">
                     </div>
                 </div>

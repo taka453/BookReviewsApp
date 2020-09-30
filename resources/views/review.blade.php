@@ -17,7 +17,7 @@
                     </ul>
                 </div>
             @endif
-            <form method="post" action="{{ route('update') }}">
+            <form method="post" action="{{ route('updateComment') }}">
                 @csrf
                 <div class="card">
                     <div class="card-body text-center">

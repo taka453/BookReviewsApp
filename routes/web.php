@@ -18,9 +18,10 @@ Route::get('/read', 'ProductController@read')->name('read');
 Route::group(['middleware' => 'auth'], function() {
     Route::get('/create', 'ProductController@create')->name('create');
     Route::post('/create/store', 'ProductController@store')->name('store');
-    Route::get('/review', 'ProductController@review')->name('review');
-    Route::post('/review', 'ProductController@update')->name('update');
     Route::get('/edit', 'ProductController@edit')->name('edit');
+    Route::post('/edit', 'ProductController@update')->name('update');
+    Route::get('/review', 'ProductController@review')->name('review');
+    Route::post('/review', 'ProductController@updateComment')->name('updateComment');
     Route::post('/', 'ProductController@delete')->name('destroy');
 });
 
