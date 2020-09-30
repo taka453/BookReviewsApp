@@ -47,6 +47,11 @@ class ProductController extends Controller
         return redirect('/');
     }
 
+    public function edit(Product $product)
+    {
+        return view('edit', ['product' => $product]);
+    }
+
     public function review(Request $request, Product $product)
     {
         $products = $request->query('product');

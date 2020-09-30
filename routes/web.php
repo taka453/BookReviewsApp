@@ -20,6 +20,8 @@ Route::group(['middleware' => 'auth'], function() {
     Route::post('/create/store', 'ProductController@store')->name('store');
     Route::get('/review', 'ProductController@review')->name('review');
     Route::post('/review', 'ProductController@update')->name('update');
+    Route::get('/edit', 'ProductController@edit')->name('edit');
+    Route::post('/', 'ProductController@delete')->name('destroy');
 });
 
 Route::get('/home', 'HomeController@index')->name('home');
