@@ -32,8 +32,8 @@
                             <div class="ml-auto card-text">
                                 <div class="dropdown">
                                     <a data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                        <button type="button" class="btn btn-link text-muted m-0 p-2">
-                                            <i class="fas fa-ellipsis-v"></i>
+                                        <button type="button" class="btn btn-white m-0 p-2">
+                                            <img src="images/dropdown.jpeg" alt="">
                                         </button>
                                     </a>
                                     <div class="dropdown-menu dropdown-menu-right">
@@ -59,7 +59,7 @@
                                                 </span>
                                             </button>
                                         </div>
-                                        <form method="POST" action="{{ route('destroy',  ['product' => $product]) }}" enctype="multipart/form-data">
+                                        <form method="POST" action="{{ route('destroy', ['product' => $product]) }}">
                                             @csrf
                                             <div class="modal-body">
                                                 {{ $product->title }}を削除します。よろしいですか？

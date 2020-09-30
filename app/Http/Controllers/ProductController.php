@@ -73,13 +73,46 @@ class ProductController extends Controller
             if($request->hasFile($validatedData['image'])) {
                 Storage::delete('public/images/' . $product->image);
                 $path = $request->file('image')->store('images', ['disk' => 'public']);
-                $product->image = basename($path);
-                $product->save();
+                $product->save($path);
             }
 
             $product->save();
 
             return redirect('/');
+    }
+    public function editRead(Request $request, Product $product)
+    {
+        $products = $request->query('product');
+        $product = Product::find($products);
+        return view('editRead', compact('product'));
+    }
+
+    public function updateRead(Request $request, Product $product)
+    {
+        $validatedData = $request->validate([
+            'id' => 'required',
+            'title' => 'required|max: 255',
+            'fee' => 'required',
+            'image' => 'mimes:jpeg,png,jpg,gif,svg|max:2048',
+            'comment' => 'required|max: 500',
+        ]);
+
+            // $path = $request->file('image')->store('images', ['disk' => 'public']);
+
+            $product = Product::find($validatedData['id']);
+            $product->title = $validatedData['title'];
+            $product->fee = $validatedData['fee'];
+            $product->comment = $validatedData['comment'];
+
+            if($request->hasFile($validatedData['image'])) {
+                Storage::delete('public/images/' . $product->image);
+                $path = $request->file('image')->store('images', ['disk' => 'public']);
+                $product->save($path);
+            }
+
+            $product->save();
+
+            return redirect('/read');
     }
 
     public function review(Request $request, Product $product)
@@ -110,5 +143,21 @@ class ProductController extends Controller
     {
         $products = Product::where('user_id', 1)->orderBy('created_at', 'DESC')->paginate(3);
         return view('read', compact('products'));
+    }
+
+    public function destroy(Request $request, Product $product)
+    {
+        $products = $request->query('product');
+        $product = Product::find($products);
+        $product->delete();
+        return redirect('/');
+    }
+
+    public function destroyRead(Request $request, Product $product)
+    {
+        $products = $request->query('product');
+        $product = Product::find($products);
+        $product->delete();
+        return redirect('/read');
     }
 }

@@ -30,6 +30,51 @@
                             {{ $product->comment }}
                         </p>
                     </div>
+                    <!-- dropdown -->
+                    <div class="ml-auto card-text">
+                    <div class="dropdown">
+                        <a data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <button type="button" class="btn btn-white m-0 p-2">
+                                <img src="images/dropdown.jpeg" alt="">
+                            </button>
+                        </a>
+                        <div class="dropdown-menu dropdown-menu-right">
+                            <a class="dropdown-item" href="{{ route('editRead', ['product' => $product]) }}">
+                                <i class="fas fa-pen mr-1"></i>積読を更新する
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item text-danger" data-toggle="modal" data-target="#modal-delete-{{ $product->id }}">
+                                <i class="fas fa-trash-alt mr-1"></i>積読を削除する
+                            </a>
+                        </div>
+                    </div>
+                    </div>
+                    <!-- dropdown -->
+                    <!---modal--->
+                    <div id="modal-delete-{{ $product->id }}" class="modal fade" tabindex="-1" role="dialog">
+                        <div class="modal-dialog" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="閉じる">
+                                        <span aria-hidden="true">
+                                            <span aria-hidden="true">&times;<span>
+                                        </span>
+                                    </button>
+                                </div>
+                                <form method="POST" action="{{ route('destroyRead', ['product' => $product]) }}">
+                                    @csrf
+                                    <div class="modal-body">
+                                        {{ $product->title }}を削除します。よろしいですか？
+                                    </div>
+                                    <div class="modal-footer jusify-content-between">
+                                        <a class="btn btn-outline-grey" data-dismiss="modal">キャンセル</a>
+                                        <button type="submit" class="btn btn-danger">削除する</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                    <!---modal--->
                 </div>
             </div>
         </div>

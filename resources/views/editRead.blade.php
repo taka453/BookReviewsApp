@@ -17,7 +17,7 @@
         @endif
         <div class="row justify-content-center container">
         <div class="col-md-10">
-            <form method='POST' action="{{route('update')}}" enctype="multipart/form-data">
+            <form method='POST' action="{{route('updateRead')}}" enctype="multipart/form-data">
                 @csrf
                 <div class="card">
                     <div class="card-body">
@@ -32,6 +32,9 @@
                         <div class="form-group">
                             <label for="file1">本のサムネイル</label>
                             <input type="file" id="file1" name="image" class="form-control-file">
+                        </div>
+                        <div class="form-group">
+                            <textarea name="comment" id="" cols="100" rows="10" placeholder="ここに感想を記入してください"></textarea>
                         </div>
                         <input type="hidden" name="id" value="{{ $product->id }}">
                         <input type="submit" class="btn btn-primary" value="更新する">
