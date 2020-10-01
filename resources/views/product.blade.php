@@ -6,10 +6,12 @@
 
 @section('content')
 
+@auth
 <div class="container-fluid">
     <div class="mx-auto" style="max: 1200px">
         <h1 style="color: #555555; text-align: center; font-size: 1.2em; padding: 24px 0px; font-weight: bold; padding: 24px 0px;">
         @foreach($products as $product)
+            @if(Auth::id() === $product->user_id)
             @if($product->comment === null)
                 <div class="col-xs-6 col-sm-6 col-md-6" style="margin: 0 auto">
                     <div class="card mb">
@@ -28,7 +30,7 @@
                                 </p>
                                 <a class="status btn btn-danger" href="{{ route('review' , ['product' => $product]) }}">未読了</a>
                             </div>
-                            @if(Auth::id() === $product->user_id)
+
                             <!-- dropdown -->
                             <div class="ml-auto card-text">
                                 <div class="dropdown">
@@ -74,10 +76,10 @@
                                 </div>
                             </div>
                             <!---modal--->
-                            @endif
                         </div>
                     </div>
                 </div>
+                @endif
             @endif
         @endforeach
     </div>
@@ -85,4 +87,9 @@
 <div class="text-center" style="width: 200px; margin: 50px auto;">
     {{ $products->links() }}
 </div>
+@endauth
+
+@guest
+    <p class="text-center">積読を保存してください</p>
+@endguest
 @endsection

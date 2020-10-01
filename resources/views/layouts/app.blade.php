@@ -41,19 +41,21 @@
                     <!-- Right Side Of Navbar -->
                     <ul class="navbar-nav ml-auto">
                         <!-- Authentication Links -->
-                        <li class="nav-item">
-                            <a href="{{ route('read') }}" class='nav-link'>積読解消ページ</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="{{ route('create') }}" class='nav-link'>積読を登録する</a>
-                        </li>
+                        @auth
+                            <li class="nav-item">
+                                <a href="{{ route('read') }}" class='nav-link'>積読解消ページ</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="{{ route('create') }}" class='nav-link'>積読を登録する</a>
+                            </li>
+                        @endauth
                         @guest
                             < class="nav-item">
-                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                                <a class="nav-link" href="{{ route('login') }}">{{ __('ログイン') }}</a>
                             </>
                             @if (Route::has('register'))
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('Register') }}</a>
+                                    <a class="nav-link" href="{{ route('register') }}">{{ __('ユーザー登録') }}</a>
                                 </li>
                             @endif
                         @else
