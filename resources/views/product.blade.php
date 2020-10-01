@@ -28,6 +28,7 @@
                                 </p>
                                 <a class="status btn btn-danger" href="{{ route('review' , ['product' => $product]) }}">未読了</a>
                             </div>
+                            @if(Auth::id() === $product->user_id)
                             <!-- dropdown -->
                             <div class="ml-auto card-text">
                                 <div class="dropdown">
@@ -73,6 +74,7 @@
                                 </div>
                             </div>
                             <!---modal--->
+                            @endif
                         </div>
                     </div>
                 </div>

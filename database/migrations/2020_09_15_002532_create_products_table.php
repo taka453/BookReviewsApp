@@ -19,6 +19,7 @@ class CreateProductsTable extends Migration
             $table->string('title', '100');
             $table->integer('fee');
             $table->string('image', '200');
+            $table->tinyInteger('status')->default(1)->comment('0=下書き, 1=アクティブ, 2=削除済み');
             $table->longText('comment')->nullable();
             $table->timestamp('updated_at')->default(DB::raw('CURRENT_TIMESTAMP on update CURRENT_TIMESTAMP'));
             $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));

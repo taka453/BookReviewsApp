@@ -30,6 +30,7 @@
                             {{ $product->comment }}
                         </p>
                     </div>
+                    @if(Auth::id() === $product->user_id)
                     <!-- dropdown -->
                     <div class="ml-auto card-text">
                     <div class="dropdown">
@@ -75,6 +76,7 @@
                         </div>
                     </div>
                     <!---modal--->
+                    @endif
                 </div>
             </div>
         </div>
