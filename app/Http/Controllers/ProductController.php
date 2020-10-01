@@ -110,6 +110,7 @@ class ProductController extends Controller
                 $product->save($path);
             }
 
+            dd($product);
             $product->save();
 
             return redirect('/read');
