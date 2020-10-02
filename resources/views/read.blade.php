@@ -6,16 +6,15 @@
 
 @section('content')
 
-<div class="container-fluid">
-    <div class="mx-auto" style="max: 1200px">
-        <h1 style="color: #555555; text-align: center; font-size: 1.2em; padding: 24px 0px; font-weight: bold; padding: 24px 0px;">
+<div class="container-fluid mt-3">
+    <div class="mx-auto" style="max-width: 1200px">
         @foreach($products as $product)
-            @if($product->comment != null)
+            @if($product->comment !== null)
                 @if(Auth::id() === $product->user_id)
                 <div class="col-xs-6 col-sm-6 col-md-6" style="margin: 0 auto">
                     <div class="card mb">
                         <div class="card-body d-flex flex-row flex-wrap">
-                            <div class="left">
+                            <div class="left mr-4">
                                 @if(!empty($product->image))
                                     <div class="image-wrapper"><img class="book-image" src="{{ asset('storage/'.$product->image) }}"></div>
                                 @else

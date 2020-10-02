@@ -10904,3 +10904,10 @@ a.text-dark:focus {
   margin: 20px auto;
 }
 
+.book-image {
+  height: 150px;
+  margin-bottom: 20px;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+

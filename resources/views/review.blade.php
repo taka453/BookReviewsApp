@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container-fluid">
+<div class="container-fluid mt-5">
     <div class="">
         <div class="mx-auto" style="max-width:1200px">
         <h1 class="text-center">お疲れ様でした!!</h1>

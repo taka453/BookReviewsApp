@@ -22,11 +22,11 @@
     <link href="{{ asset('css/top.css') }}" rel="stylesheet">
     @yield('css')
 </head>
-<body>
+<body style="min-height: 100%; display: flex; flex-direction: column;">
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light shadow-sm" style="background-color: #FFCCCC">
             <div class="container">
-                <a class="navbar-brand" href="{{ url('/') }}">
+                <a class="navbar-brand" href="{{ url('/') }}" style="font-size: 20px; font-weight: bold;">
                     {{ config('app.name', 'Laravel') }}
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
@@ -49,6 +49,10 @@
                             <li class="nav-item">
                                 <a href="{{ route('create') }}" class='nav-link'>積読を登録する</a>
                             </li>
+                            <li class="nav-item">
+                                <a href="{{ route('show') }}" class='nav-link'>積読を金額を確認</a>
+                            </li>
+
                         @endauth
                         @guest
                             <li class="nav-item">
@@ -83,16 +87,16 @@
             </div>
         </nav>
 
-        <main class="">
+        <main class="wrapper" style="display: flex; flex-direction: column; min-height: 80vh;">
             @yield('content')
         </main>
 
-        <footer class="footer_design text-center" style="bottom: 0; height: 150px; background: #FFCCCC; postion: absolute;">
+        <footer class="footer_design text-center" style="bottom: 0; height: 150px; background: #FFCCCC; postion: absolute; margin: auto;">
             <div style="">
-                積読を登録しよう<br>
-                <p style="font-size:2.4em">積ん読くん</p><br>
+                さぁ積読を登録しよう!!<br>
+                <p style="font-size:2.4em">Tsundokumgmt.</p><br>
             </div>
-            <p style="font-size:0.7em; margin: 0;">@copyright tundoku</p>
+            <p style="font-size:0.7em; margin: 0;">@copyright Tsundokumgmt.</p>
         </footer>
     </div>
 </body>

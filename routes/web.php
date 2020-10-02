@@ -26,6 +26,7 @@ Route::group(['middleware' => 'auth'], function() {
     Route::post('/review', 'ProductController@updateComment')->name('updateComment');
     Route::post('/', 'ProductController@destroy')->name('destroy');
     Route::post('/read', 'ProductController@destroyRead')->name('destroyRead');
+    Route::get('/show', 'ProductController@show')->name('show');
 });
 
 Route::get('/home', 'HomeController@index')->name('home');

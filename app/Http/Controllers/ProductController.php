@@ -6,6 +6,7 @@ use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class ProductController extends Controller
 {
@@ -111,7 +112,6 @@ class ProductController extends Controller
                 $product->save($path);
             }
 
-            dd($product);
             $product->save();
 
             return redirect('/read');
@@ -161,5 +161,11 @@ class ProductController extends Controller
         $product = Product::find($products);
         $product->delete();
         return redirect('/read');
+    }
+
+    public function show(Product $product)
+    {
+        $products = DB::Table('products')->sum('fee');
+        return view('show', compact('products'));
     }
 }
