@@ -1,5 +1,9 @@
 @extends('layouts.app')
 
+@section('css')
+    <link href="{{ asset('css/top.css') }}" rel="stylesheet">
+@endsection
+
 @section('content')
 <div class="container-fluid">
     <div class="mx-auto" style="max-width:1200px">

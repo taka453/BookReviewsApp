@@ -90,6 +90,8 @@
 @endauth
 
 @guest
-    <p class="text-center">積読を保存してください</p>
+    <div class="wrapper text-center">
+        <img class="book_top" src="{{ asset('images/book_top.jpg') }}" style="width: 100%; height: 800px; object-fit: cover">
+    </div>
 @endguest
 @endsection

@@ -19,11 +19,12 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/layout.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/top.css') }}" rel="stylesheet">
     @yield('css')
 </head>
 <body>
     <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
+        <nav class="navbar navbar-expand-md navbar-light shadow-sm" style="background-color: #FFCCCC">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
                     {{ config('app.name', 'Laravel') }}
@@ -50,9 +51,9 @@
                             </li>
                         @endauth
                         @guest
-                            < class="nav-item">
+                            <li class="nav-item">
                                 <a class="nav-link" href="{{ route('login') }}">{{ __('ログイン') }}</a>
-                            </>
+                            </li>
                             @if (Route::has('register'))
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('register') }}">{{ __('ユーザー登録') }}</a>
@@ -82,9 +83,17 @@
             </div>
         </nav>
 
-        <main class="py-4">
+        <main class="">
             @yield('content')
         </main>
+
+        <footer class="footer_design text-center" style="bottom: 0; height: 150px; background: #FFCCCC; postion: absolute;">
+            <div style="">
+                積読を登録しよう<br>
+                <p style="font-size:2.4em">積ん読くん</p><br>
+            </div>
+            <p style="font-size:0.7em; margin: 0;">@copyright tundoku</p>
+        </footer>
     </div>
 </body>
 </html>
