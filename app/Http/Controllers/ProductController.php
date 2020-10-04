@@ -165,7 +165,9 @@ class ProductController extends Controller
 
     public function show(Product $product)
     {
-        $products = DB::Table('products')->sum('fee');
-        return view('show', compact('products'));
+        $user_id = Auth::id();
+        $comments = DB::table('products')->pluck('comment');
+        $products = DB::table('products')->where('user_id', $user_id)->sum('fee');
+        return view('show', compact('comments','products'));
     }
 }

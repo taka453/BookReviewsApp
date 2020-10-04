@@ -28,6 +28,7 @@
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}" style="font-size: 20px; font-weight: bold;">
                     {{ config('app.name', 'Laravel') }}
+                    <img src="{{ asset('images/book_icon.png') }}" alt="">
                 </a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -91,12 +92,12 @@
             @yield('content')
         </main>
 
-        <footer class="footer_design text-center" style="bottom: 0; height: 150px; background: #FFCCCC; postion: absolute; margin: auto;">
+        <footer class="footer_design text-center" style="bottom: 0; height: 160px; background: #FFCCCC; postion: absolute; margin: auto;">
             <div style="">
                 さぁ積読を登録しよう!!<br>
-                <p style="font-size:2.4em">Tsundokumgmt.</p><br>
+                <p style="font-size:2.5em; margin: 0;">Tsundokumgmt.</p><br>
+                <p style="font-size:0.7em; margin: 0;">@copyright Tsundokumgmt.</p>
             </div>
-            <p style="font-size:0.7em; margin: 0;">@copyright Tsundokumgmt.</p>
         </footer>
     </div>
 </body>
