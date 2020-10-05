@@ -90,7 +90,7 @@
 
 @guest
     <div class="wrapper text-center">
-        <img class="book_top" src="{{ asset('images/book_top.jpg') }}" style="width: 100%; height: 660px; object-fit: cover">
+        <img class="book_top" src="{{ asset('images/book_top.jpg') }}" style="width: 100%; height: 810px; object-fit: cover">
     </div>
 @endguest
 
