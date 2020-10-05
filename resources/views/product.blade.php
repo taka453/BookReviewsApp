@@ -10,8 +10,6 @@
 <div class="container-fluid mt-3">
     <div class="mx-auto" style="max-width: 1200px">
         @foreach($products as $product)
-            @if(Auth::id() === $product->user_id)
-            @if($product->comment === null)
                 <div class="col-xs-6 col-sm-6 col-md-6" style="margin: 0 auto">
                     <div class="card mb">
                         <div class="card-body d-flex flex-row flex-wrap">
@@ -78,8 +76,6 @@
                         </div>
                     </div>
                 </div>
-                @endif
-            @endif
         @endforeach
     </div>
 </div>

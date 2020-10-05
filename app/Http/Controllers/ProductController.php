@@ -12,7 +12,8 @@ class ProductController extends Controller
 {
     public function index()
     {
-        $products = Product::where('status', 1)->orderBy('created_at', 'DESC')->paginate(3);
+        $user_id = Auth::id();
+        $products = Product::where('status', 1)->where('user_id', $user_id)->whereNull('comment')->orderBy('created_at', 'DESC')->paginate(3);
         return view('product', compact('products'));
     }
 
@@ -143,7 +144,8 @@ class ProductController extends Controller
 
     public function read()
     {
-        $products = Product::where('user_id', 1)->orderBy('created_at', 'DESC')->paginate(3);
+        $user_id = Auth::id();
+        $products = Product::where('user_id', 1)->where('user_id', $user_id)->whereNotNull ('comment')->orderBy('created_at', 'DESC')->paginate(3);
         return view('read', compact('products'));
     }
 
@@ -166,8 +168,7 @@ class ProductController extends Controller
     public function show(Product $product)
     {
         $user_id = Auth::id();
-        $products = DB::table('products')->where('user_id', $user_id)->get();
-        $sum = $products->sum('fee');
-        return view('show', compact('products', 'sum'));
+        $sum = DB::table('products')->where('user_id', $user_id)->whereNull('comment')->sum('fee');
+        return view('show', compact('sum'));
     }
 }
