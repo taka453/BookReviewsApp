@@ -69,14 +69,12 @@ class ProductController extends Controller
             'image' => 'mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
-            // $path = $request->file('image')->store('images', ['disk' => 'public']);
-
             $product = Product::find($validatedData['id']);
             $product->title = $validatedData['title'];
             $product->fee = $validatedData['fee'];
 
             if($request->hasFile($validatedData['image'])) {
-                Storage::delete('public/images/' . $product->image);
+                Storage::delete('/public/' . $product->image);
                 $path = $request->file('image')->store('images', ['disk' => 'public']);
                 $product->save($path);
             }
@@ -110,7 +108,7 @@ class ProductController extends Controller
             $product->comment = $validatedData['comment'];
 
             if($request->hasFile($validatedData['image'])) {
-                Storage::delete('public/images/' . $product->image);
+                Storage::delete('/public/' . $product->image);
                 $path = $request->file('image')->store('images', ['disk' => 'public']);
                 $product->save($path);
             }
@@ -153,9 +151,9 @@ class ProductController extends Controller
 
     public function destroy(Request $request, Product $product)
     {
-        Storage::delete('public/images/' . $product->image);
         $products = $request->query('product');
         $product = Product::find($products);
+        Storage::delete('/public/' . $product->image);
         $product->delete();
         return redirect('/');
     }
@@ -164,6 +162,7 @@ class ProductController extends Controller
     {
         $products = $request->query('product');
         $product = Product::find($products);
+        Storage::delete('/public/' . $product->image);
         $product->delete();
         return redirect('/read');
     }
