@@ -4,7 +4,6 @@
 <div class="container-fluid mt-5">
     <div class="">
         <div class="mx-auto" style="max-width:1200px">
-        <h1 class="text-center">お疲れ様でした!!</h1>
 
         <div class="row justify-content-center container">
         <div class="col-md-10">
@@ -22,6 +21,7 @@
                 <div class="card">
                     <div class="card-body text-center">
                         <div class="form-group">
+                            <h1 class="text-center">お疲れ様でした!!</h1>
                             <textarea name="comment" id="" cols="100" rows="10" placeholder="ここに感想を記入してください"></textarea>
                         </div>
                         <input type="hidden" name="id" value="{{ $product->id }}">

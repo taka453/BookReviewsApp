@@ -26,11 +26,11 @@
                         <div class="card-body">
                             <div class="form-group">
                                 <label>タイトル</label>
-                                <input type="text" class="form-control" value="{{ $product->title ?? old('title') }}" name="title">
+                                <input type="text" class="form-control" value="{{ $product->title }}" name="title">
                             </div>
                             <div class="form-group">
                                 <label>金額</label>
-                                <input type="text" class="form-control" value="{{ $product->fee ?? old('fee') }}" name="fee">
+                                <input type="text" class="form-control" value="{{ $product->fee }}" name="fee">
                             </div>
                             <div class="form-group">
                                 <label for="file1">再度画像を選択してください</label>

@@ -38,12 +38,14 @@ class ProductController extends Controller
                 'user_id' => \Auth::id(),
                 'title' => $validatedData['title'],
                 'fee' => $validatedData['fee'],
-                'image' => $path
+                'image' => $path,
             ];
         } else {
-            $data = ['user_id' => \Auth::id(),
-            'title' => $validatedData['title'],
-            'fee' => $validatedData['fee']];
+            $data = [
+                'user_id' => \Auth::id(),
+                'title' => $validatedData['title'],
+                'fee' => $validatedData['fee'],
+            ];
         }
 
         Product::insert($data);
@@ -145,12 +147,13 @@ class ProductController extends Controller
     public function read()
     {
         $user_id = Auth::id();
-        $products = Product::where('user_id', 1)->where('user_id', $user_id)->whereNotNull ('comment')->orderBy('created_at', 'DESC')->paginate(3);
+        $products = Product::where('user_id', 1)->where('user_id', $user_id)->whereNotNull ('comment')->orderBy('updated_at', 'DESC')->paginate(3);
         return view('read', compact('products'));
     }
 
     public function destroy(Request $request, Product $product)
     {
+        Storage::delete('public/images/' . $product->image);
         $products = $request->query('product');
         $product = Product::find($products);
         $product->delete();
