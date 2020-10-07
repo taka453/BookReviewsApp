@@ -14,7 +14,7 @@
                 <div class="card mb">
                     <div class="card-body d-flex flex-row flex-wrap">
                         <div class="left mr-4">
-                            @if(!empty($product->image))
+                            @if($product->image !== null)
                                 <div class="image-wrapper"><img class="book-image" src="{{ asset('storage/'. $product->image) }}"></div>
                             @else
                                 <div class="image-wrapper"><img class="book-image" src="{{ asset('images/dummy.png') }}"></div>

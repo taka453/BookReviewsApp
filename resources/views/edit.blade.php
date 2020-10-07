@@ -32,16 +32,18 @@
                                 <label>金額</label>
                                 <input type="text" class="form-control" value="{{ $product->fee }}" name="fee">
                             </div>
+                            <div>
                             <div class="form-group">
                                 <label for="file1">再度画像を選択してください</label>
                                 <input type="file" id="file1" name="image" class="form-control-file">
+                            </div>
                             </div>
                             <input type="hidden" name="id" value="{{ $product->id }}">
                             <input type="submit" class="btn btn-primary" value="更新する">
                         </div>
                     </div>
-                </div>
-            </form>
+                </form>
+            </div>
         </div>
     </div>
 </div>
