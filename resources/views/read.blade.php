@@ -20,7 +20,7 @@
                                 @endif
                             </div>
                             <div class="right">
-                                <h3 class="">{{ $product->title }}</h3>
+                                <p class="">{{ $product->title }}</p>
                                 <p class="price">
                                     {{ $product->fee }}円
                                 </p>

@@ -8,6 +8,9 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
+//Clientクラスを使用
+use GuzzleHttp\Client;
+
 class ProductController extends Controller
 {
     public function index()
@@ -17,9 +20,30 @@ class ProductController extends Controller
         return view('product', compact('products'));
     }
 
-    public function create()
+    public function create(Request $request)
     {
-        return view('create');
+        //-----API記述-----//
+        $data = [];
+        $items = null;
+
+        if(!empty($request->keyword))
+        {
+            $title = urlencode($request->keyword);
+            $url = 'https://www.googleapis.com/books/v1/volumes?q=' . $title . '&maxResults=1&country=JP&tbm=bks';
+            $client = new Client;
+            $response = $client->request("GET", $url);
+            $body = $response->getBody();
+            $bodyArray = json_decode($body, true);
+            $items = $bodyArray['items'];
+        }
+
+        $data = [
+            'items' => $items,
+            'keyword' => $request->keyword,
+        ];
+
+        return view('create', $data);
+        //---------------//
     }
 
     public function store(Request $request)
