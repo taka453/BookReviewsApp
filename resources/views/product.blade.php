@@ -22,9 +22,7 @@
                         </div>
                         <div class="right">
                             <p class="title">{{ $product->title }}</ｐ>
-                            <p class="fee">
-                                {{ $product->fee }}円
-                            </p>
+                            <p class="fee">{{ $product->fee }}円</p>
                             <a class="status btn btn-danger" href="{{ route('review' , ['product' => $product]) }}">未読了</a>
                         </div>
 

@@ -51,7 +51,7 @@
                                 <a href="{{ route('create') }}" class='nav-link'>積読を登録する</a>
                             </li>
                             <li class="nav-item">
-                                <a href="{{ route('show') }}" class='nav-link'>積読を金額を確認</a>
+                                <a href="{{ route('show') }}" class='nav-link'>積読金額を確認</a>
                             </li>
 
                         @endauth

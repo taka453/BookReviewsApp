@@ -4,18 +4,18 @@
 <div class="container-fluid">
     <div class="">
         <div class="mx-auto" style="max-width:1200px">
-        @if($errors->any())
-            <div class="alert alert-danger">
-                <ul>
-                    @foreach($errors->all() as $error)
-                        <li>{{ $error }}</li>
-                    @endforeach
-                </ul>
-            </div>
-        @endif
         <div class="row justify-content-center container">
-            <div class="col-md-10">
-                <div class="text-center" style="background-color: white; margin: 20px auto; padding: 30px 0; border: 1px solid #ddd; border-radius: 6px;">
+            <div class="col-md-10" style="margin-top: 5px;">
+                @if($errors->any())
+                    <div class="alert alert-danger">
+                        <ul>
+                            @foreach($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
+                <div class="text-center" style="background-color: white; margin: 10px auto 0; padding: 20px 0; border: 1px solid #ddd; border-radius: 6px;">
                     <h1>本を検索してください</h1>
                     <form action="/create" method="get">
                         <p style="margin: 5px;">書籍名:</span><input type="text" name="keyword" size="50" value="{{ $keyword }}">&nbsp;<input type="submit" value="検索"></p>
@@ -41,7 +41,7 @@
                                 <img src="{{ $item['volumeInfo']['imageLinks']['thumbnail']}}">
                                 <br>
                                 <label for="file1">本のサムネイル</label>
-                                <input type="file" id="file1" name="image" class="form-control-file">
+                                <input type="file" id="file1" name="image" class="form-control-file" src="{{ $item['volumeInfo']['imageLinks']['thumbnail']">
                             </div>
                             <input type="submit" class="btn btn-primary" value="積読を登録する">
                         </div>

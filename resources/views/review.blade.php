@@ -22,7 +22,7 @@
                     <div class="card-body text-center">
                         <div class="form-group">
                             <h1 class="text-center">お疲れ様でした!!</h1>
-                            <textarea name="comment" id="" cols="100" rows="10" placeholder="ここに感想を記入してください"></textarea>
+                            <textarea name="comment" id="" cols="100" rows="10" placeholder="こちらに感想を記入してください"></textarea>
                         </div>
                         <input type="hidden" name="id" value="{{ $product->id }}">
                         <button type="submit" class="btn btn-primary">感想を登録する</button>
