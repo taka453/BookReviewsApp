@@ -194,7 +194,7 @@ class ProductController extends Controller
     public function show(Product $product)
     {
         $user_id = Auth::id();
-        $sum = Product::all()->where('user_id', $user_id)->whereNull('comment')->sum('fee');;
+        $sum = Product::all()->where('user_id', $user_id)->whereNull('comment')->sum('fee');
         return view('show', compact('sum'));
     }
 }

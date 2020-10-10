@@ -18,7 +18,6 @@
                 </ul>
             </div>
         @endif
-        
         <div class="row justify-content-center container">
             <div class="col-md-10">
                 <form method='POST' action="{{route('update')}}" enctype="multipart/form-data">
