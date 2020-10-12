@@ -5,7 +5,7 @@
 @auth
 <div class="container-fluid">
     <div class="mt-5 col-md-5" style="margin: 0px auto">
-        <div class="card" style="height: 40vh;">
+        <div class="card" style="height: 60vh;">
             <div class="card-body">
                 <div class="text-center" style="margin-top: 100px;">
                     <p style="font-size: 20px; font-weight: bold;">あなたの積読金額は・・・</p>
@@ -15,7 +15,7 @@
                     @elseif($sum >= 5000)
                         <p style="font-size: 25px; font-weight: bold;">もっと頑張ろう！！</p>
                     @elseif($sum >= 3000)
-                        <p style="font-size: 25px; font-weight: bold;">積読解消までもう少し</p>
+                        <p style="font-size: 25px; font-weight: bold;">積読解消までもうひと頑張りです</p>
                     @endif
                 </div>
             </div>

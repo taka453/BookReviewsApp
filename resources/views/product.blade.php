@@ -10,7 +10,7 @@
 <div class="container-fluid mt-3">
     <div class="mx-auto" style="max-width: 1200px">
         @foreach($products as $product)
-            <div class="col-xs-6 col-sm-6 col-md-6" style="margin: 0 auto;">
+            <div class="" style="margin: 0 auto; width: 650px;">
                 <div class="card mb">
                     <div class="card-body d-flex flex-row flex-wrap">
                         <div class="left mr-4">
@@ -20,7 +20,7 @@
                                 <div class="image-wrapper"><img class="book-image" src="{{ asset('images/dummy.png') }}"></div>
                             @endif
                         </div>
-                        <div class="right">
+                        <div class="right" style="font-size: 15px;">
                             <p class="title">{{ $product->title }}</ｐ>
                             <p class="fee">{{ $product->fee }}円</p>
                             <a class="status btn btn-danger" href="{{ route('review' , ['product' => $product]) }}">未読了</a>

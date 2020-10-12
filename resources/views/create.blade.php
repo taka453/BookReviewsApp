@@ -15,7 +15,7 @@
                         </ul>
                     </div>
                 @endif
-                <div class="text-center" style="background-color: white; margin: 10px auto 0; padding: 20px 0; border: 1px solid #ddd; border-radius: 6px;">
+                <div class="text-center" style="background-color: white; margin: 0 auto; padding: 20px 0; border: 1px solid #ddd; border-radius: 6px;">
                     <h1>本を検索してください</h1>
                     <form action="/create" method="get">
                         <p style="margin: 5px;">書籍名:</span><input type="text" name="keyword" size="50" value="{{ $keyword }}">&nbsp;<input type="submit" value="検索"></p>
