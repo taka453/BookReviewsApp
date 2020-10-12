@@ -2,11 +2,9 @@
 
 @section('content')
 <div class="container-fluid mt-5">
-    <div class="">
-        <div class="mx-auto" style="max-width:1200px">
-
-        <div class="row justify-content-center container">
-        <div class="col-md-10">
+    <div class="mx-auto" style="max-width:1200px">
+        <div class="row justify-content-center container" style="margin: 0 auto; width: 730px;">
+            <div class="col-md-10">
             @if ($errors->any())
                 <div class="alert alert-danger">
                     <ul>
@@ -22,7 +20,7 @@
                     <div class="card-body text-center">
                         <div class="form-group">
                             <h1 class="text-center">お疲れ様でした!!</h1>
-                            <textarea name="comment" id="" cols="100" rows="10" placeholder="こちらに感想を記入してください"></textarea>
+                            <textarea name="comment" id="" cols="70" rows="15" placeholder="こちらに感想を記入してください"></textarea>
                         </div>
                         <input type="hidden" name="id" value="{{ $product->id }}">
                         <button type="submit" class="btn btn-primary">感想を登録する</button>
