@@ -14,7 +14,7 @@
                 </ul>
             </div>
         @endif
-        <div class="row justify-content-center container">
+        <div class="row justify-content-center container" style="width: 650px; margin:0 auto;">
             <div class="col-md-10">
                 <form method='POST' action="{{route('updateRead')}}" enctype="multipart/form-data">
                     @csrf
@@ -33,7 +33,7 @@
                                 <input type="file" id="file1" name="image" class="form-control-file">
                             </div>
                             <div class="form-group">
-                                <textarea name="comment" id="" cols="100" rows="10">{{ $product->comment }}</textarea>
+                                <textarea name="comment" id="" cols="60" rows="10">{{ $product->comment }}</textarea>
                             </div>
                             <input type="hidden" name="id" value="{{ $product->id }}">
                             <input type="submit" class="btn btn-primary" value="更新する">

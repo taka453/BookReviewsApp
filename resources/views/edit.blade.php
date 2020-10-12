@@ -18,7 +18,7 @@
                 </ul>
             </div>
         @endif
-        <div class="row justify-content-center container">
+        <div class="row justify-content-center container" style="width: 650px; margin:0 auto;">
             <div class="col-md-10">
                 <form method='POST' action="{{route('update')}}" enctype="multipart/form-data">
                     @csrf
@@ -37,10 +37,9 @@
                                 <label for="file1">再度画像を選択してください</label>
                                 <input type="file" id="file1" name="image" class="form-control-file">
                             </div>
-                            </div>
-                            <input type="hidden" name="id" value="{{ $product->id }}">
-                            <input type="submit" class="btn btn-primary" value="更新する">
                         </div>
+                        <input type="hidden" name="id" value="{{ $product->id }}">
+                        <input type="submit" class="btn btn-primary" value="更新する">
                     </div>
                 </form>
             </div>
