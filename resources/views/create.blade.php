@@ -27,33 +27,31 @@
                     </div>
                 </div>
                 <br>
-                    <form method='POST' action="{{route('store')}}" enctype="multipart/form-data">
-                        @csrf
-                        @foreach((array) $items as $item)
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="form-group">
-                                    <label>タイトル</label>
-                                    <input type="text" class="form-control" name="title" value="{{ $item['volumeInfo']['title'] }}" placeholder="タイトルを入力">
-                                </div>
-                                <div class="form-group">
-                                    <label>金額</label>
-                                    <input type="text" class="form-control" name="fee" placeholder="金額を入力">
-                                </div>
-                                <div class="form-group">
-                                    <label>本の画像</label>
-                                    <br>
-                                    <img src="{{ $item['volumeInfo']['imageLinks']['thumbnail']}}">
-                                    <br>
-                                    <label for="file1">本のサムネイル</label>
-                                    <input type="file" id="file1" name="image" class="form-control-file" src="{{ $item['volumeInfo']['imageLinks']['thumbnail']">
-                                </div>
-                                <input type="submit" class="btn btn-primary" value="積読を登録する">
+                <form method='POST' action="{{route('store')}}" enctype="multipart/form-data">
+                    @csrf
+                    @foreach((array) $items as $item)
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label>タイトル</label>
+                                <input type="text" class="form-control" name="title" value="{{ $item['volumeInfo']['title'] }}" placeholder="タイトルを入力">
                             </div>
+                            <div class="form-group">
+                                <label>金額</label>
+                                <input type="text" class="form-control" name="fee" placeholder="金額を入力">
+                            </div>
+                            <div class="form-group">
+                                <label>本の画像</label>
+                                <br>
+                                <img src="{{ $item['volumeInfo']['imageLinks']['thumbnail']}}">
+                            </div>
+                            <input type="hidden" name="api_id" value="{{ $item['id'] }}">
+                            <input type="submit" class="btn btn-primary" value="積読を登録する">
                         </div>
-                        @endforeach
-                    </form>
-                @endif
+                    </div>
+                    @endforeach
+                </form>
+                    @endif
             </div>
         </div>
     </div>

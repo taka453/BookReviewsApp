@@ -16,8 +16,30 @@ class ProductController extends Controller
     public function index()
     {
         $user_id = Auth::id();
+
+        $items = null;
+
+        $data = [];
         $products = Product::where('status', 1)->where('user_id', $user_id)->whereNull('comment')->orderBy('created_at', 'DESC')->paginate(3);
-        return view('product', compact('products'));
+        foreach($products as $product) {
+            $item = $product->api_id;
+            $url = 'https://www.googleapis.com/books/v1/volumes?q=' . $item . '&country=JP&tbm=bks';
+            $client = new Client;
+            $response = $client->request("GET", $url);
+            $body = $response->getBody();
+            $bodyArray = json_decode($body, true);
+            $items = $bodyArray['items'];
+        }
+
+        $data = [
+            'products' => $products,
+            'items' => $items,
+        ];
+
+        return view('product',
+        [
+            'data' => $data,
+        ]);
     }
 
     public function create(Request $request)
@@ -42,35 +64,24 @@ class ProductController extends Controller
             'keyword' => $request->keyword,
         ];
 
+        // dd($items);
+        // AX63DwAAQBAJ
         return view('create', $data);
         //---------------//
     }
 
     public function store(Request $request)
     {
-
         $validatedData = $request->validate([
-            'title' => 'required|max: 255',
+            'api_id' => 'required',
             'fee' => 'required',
-            'image' => 'mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
-        if($request->hasFile('image')) {
-            $path = $request->file('image')->store('images', ['disk' => 'public']);
-
-            $data = [
-                'user_id' => \Auth::id(),
-                'title' => $validatedData['title'],
-                'fee' => $validatedData['fee'],
-                'image' => $path,
-            ];
-        } else {
-            $data = [
-                'user_id' => \Auth::id(),
-                'title' => $validatedData['title'],
-                'fee' => $validatedData['fee'],
-            ];
-        }
+        $data = [
+            'user_id' => \Auth::id(),
+            'api_id' => $validatedData['api_id'],
+            'fee' => $validatedData['fee'],
+        ];
 
         Product::insert($data);
 
