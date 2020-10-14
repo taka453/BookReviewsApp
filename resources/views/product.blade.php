@@ -9,19 +9,19 @@
 @auth
 <div class="container-fluid mt-3">
     <div class="mx-auto" style="max-width: 1200px">
-    @php
-        dd($data);
-    @endphp
         @foreach($products as $product)
-            @foreach((array)$items as $item)
             <div class="" style="margin: 0 auto; width: 650px;">
                 <div class="card mb">
                     <div class="card-body d-flex flex-row flex-wrap">
                         <div class="left mr-4">
-                            <div class="image-wrapper"><img class="book-image" src="{{ $item['volumeInfo']['imageLinks']['thumbnail'] }}"></div>
+                            @if($product->image !== null)
+                                <div class="image-wrapper"><img class="book-image" src="{{ asset('storage/'. $product->image) }}"></div>
+                            @else
+                                <div class="image-wrapper"><img class="book-image" src="{{ asset('images/dummy.png') }}"></div>
+                            @endif
                         </div>
                         <div class="right" style="font-size: 15px;">
-                            <p class="title">{{ $$item['volumeInfo']['title'] }}</ｐ>
+                            <p class="title">{{ $product->title }}</ｐ>
                             <p class="fee">{{ $product->fee }}円</p>
                             <a class="status btn btn-danger" href="{{ route('review' , ['product' => $product]) }}">未読了</a>
                         </div>
@@ -74,7 +74,6 @@
                     </div>
                 </div>
             </div>
-            @endforeach
         @endforeach
     </div>
 </div>

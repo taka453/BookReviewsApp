@@ -8,80 +8,45 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
-//Clientクラスを使用
-use GuzzleHttp\Client;
-
 class ProductController extends Controller
 {
     public function index()
     {
         $user_id = Auth::id();
-
-        $items = null;
-
-        $data = [];
         $products = Product::where('status', 1)->where('user_id', $user_id)->whereNull('comment')->orderBy('created_at', 'DESC')->paginate(3);
-        foreach($products as $product) {
-            $item = $product->api_id;
-            $url = 'https://www.googleapis.com/books/v1/volumes?q=' . $item . '&country=JP&tbm=bks';
-            $client = new Client;
-            $response = $client->request("GET", $url);
-            $body = $response->getBody();
-            $bodyArray = json_decode($body, true);
-            $items = $bodyArray['items'];
-        }
-
-        $data = [
-            'products' => $products,
-            'items' => $items,
-        ];
-
-        return view('product',
-        [
-            'data' => $data,
-        ]);
+        return view('product', compact('products'));
     }
 
-    public function create(Request $request)
+    public function create()
     {
-        //-----API記述-----//
-        $data = [];
-        $items = null;
-
-        if(!empty($request->keyword))
-        {
-            $title = urlencode($request->keyword);
-            $url = 'https://www.googleapis.com/books/v1/volumes?q=' . $title . '&maxResults=1&country=JP&tbm=bks';
-            $client = new Client;
-            $response = $client->request("GET", $url);
-            $body = $response->getBody();
-            $bodyArray = json_decode($body, true);
-            $items = $bodyArray['items'];
-        }
-
-        $data = [
-            'items' => $items,
-            'keyword' => $request->keyword,
-        ];
-
-        // dd($items);
-        // AX63DwAAQBAJ
-        return view('create', $data);
-        //---------------//
+        return view('create');
     }
 
     public function store(Request $request)
     {
+
         $validatedData = $request->validate([
-            'api_id' => 'required',
+            'title' => 'required|max: 255',
             'fee' => 'required',
+            'image' => 'mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
-        $data = [
-            'user_id' => \Auth::id(),
-            'api_id' => $validatedData['api_id'],
-            'fee' => $validatedData['fee'],
-        ];
+        if($request->hasFile('image')) {
+            $path = $request->file('image')->store('images', ['disk' => 'public']);
+
+            $data = [
+                'user_id' => \Auth::id(),
+                'title' => $validatedData['title'],
+                'fee' => $validatedData['fee'],
+                'image' => $path,
+            ];
+        } else {
+            $data = [
+                'user_id' => \Auth::id(),
+                'title' => $validatedData['title'],
+                'fee' => $validatedData['fee'],
+            ];
+        }
 
         Product::insert($data);
 
@@ -104,19 +69,14 @@ class ProductController extends Controller
             'image' => 'mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
-            $product = Product::find($validatedData['id']);
-            $product->title = $validatedData['title'];
-            $product->fee = $validatedData['fee'];
+        $product = Product::find($validatedData['id']);
+        $product->title = $validatedData['title'];
+        $product->fee = $validatedData['fee'];
+        Storage::delete('/public/' . $product->image);
+        $product->image = $request->file('image')->store('images', ['disk' => 'public']);
 
-            if($request->hasFile($validatedData['image'])) {
-                Storage::delete('/public/' . $product->image);
-                $path = $request->file('image')->store('images', ['disk' => 'public']);
-                $product->save($path);
-            }
-
-            $product->save();
-
-            return redirect('/');
+        $product->save();
+        return redirect('/');
     }
     public function editRead(Request $request, Product $product)
     {
@@ -135,22 +95,16 @@ class ProductController extends Controller
             'comment' => 'required|max: 500',
         ]);
 
-            // $path = $request->file('image')->store('images', ['disk' => 'public']);
+        $product = Product::find($validatedData['id']);
+        $product->title = $validatedData['title'];
+        $product->fee = $validatedData['fee'];
+        $product->comment = $validatedData['comment'];
+        Storage::delete('/public/' . $product->image);
+        $product->image = $request->file('image')->store('images', ['disk' => 'public']);
 
-            $product = Product::find($validatedData['id']);
-            $product->title = $validatedData['title'];
-            $product->fee = $validatedData['fee'];
-            $product->comment = $validatedData['comment'];
+        $product->save();
 
-            if($request->hasFile($validatedData['image'])) {
-                Storage::delete('/public/' . $product->image);
-                $path = $request->file('image')->store('images', ['disk' => 'public']);
-                $product->save($path);
-            }
-
-            $product->save();
-
-            return redirect('/read');
+        return redirect('/read');
     }
 
     public function review(Request $request, Product $product)
@@ -205,7 +159,7 @@ class ProductController extends Controller
     public function show(Product $product)
     {
         $user_id = Auth::id();
-        $sum = Product::all()->where('user_id', $user_id)->whereNull('comment')->sum('fee');
+        $sum = DB::table('products')->where('user_id', $user_id)->whereNull('comment')->sum('fee');
         return view('show', compact('sum'));
     }
 }

@@ -16,7 +16,7 @@
                         <p style="font-size: 25px; font-weight: bold;">もっと頑張ろう！！</p>
                     @elseif($sum >= 3000)
                         <p style="font-size: 25px; font-weight: bold;">積読解消まで、<br>もう少し！！</p>
-                    @elseif($sum <= 3000)
+                    @elseif($sum >= 2000)
                         <p style="font-size: 25px; font-weight: bold;">積読解消が見えてきました！</p>
                     @endif
                 </div>
