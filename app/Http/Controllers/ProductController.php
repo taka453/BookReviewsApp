@@ -24,9 +24,7 @@ class ProductController extends Controller
         foreach($products as $product) {
             $item = $product->api_id;
             $url = 'https://www.googleapis.com/books/v1/volumes?q=' . $item . '&country=JP&tbm=bks';
-            $client = new Client;
-            $response = $client->request("GET", $url);
-            $body = $response->getBody();
+            $body = file_get_contents($url);
             $bodyArray = json_decode($body, true);
             $items = $bodyArray['items'];
         }
