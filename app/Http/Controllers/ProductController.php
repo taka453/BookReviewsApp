@@ -28,13 +28,7 @@ class ProductController extends Controller
             $bodyArray = json_decode($body, true);
             $items = $bodyArray['items'];
         }
-
-        $data = [
-            'products' => $products,
-            'items' => $items
-        ];
-
-        return view('product')->with($data);
+        return view('product', compact('products', 'items'));
     }
 
     public function create(Request $request)
