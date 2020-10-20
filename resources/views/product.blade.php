@@ -10,17 +10,16 @@
 <div class="container-fluid mt-3">
     <div class="mx-auto" style="max-width: 1200px">
         @foreach($products as $product)
-            @foreach((array)$items as $item)
             <div class="" style="margin: 0 auto; width: 650px;">
                 <div class="card mb">
                     <div class="card-body d-flex flex-row flex-wrap">
                         <div class="left mr-4">
-                            <div class="image-wrapper"><img class="book-image" src="{{ $item['volumeInfo']['imageLinks']['thumbnail'] }}"></div>
+                            <div class="image-wrapper"><img class="book-image" src="{{ $product->image }}"></div>
                         </div>
                         <div class="right" style="font-size: 15px;">
-                            <p class="title">{{ $item['volumeInfo']['title'] }}</ｐ>
+                            <p class="title">{{ $product->title }}</ｐ>
                             <p class="fee">{{ $product->fee }}円</p>
-                            <a class="status btn btn-danger" href="{{ route('review' , ['product' => $product]) }}">未読了</a>
+                            <a class="status btn btn-danger" href="{{ route('review' , ['product' => $product->id]) }}">未読了</a>
                         </div>
 
                         <!-- dropdown -->
@@ -32,7 +31,7 @@
                                     </button>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right">
-                                    <a class="dropdown-item" href="{{ route('edit', ['product' => $product]) }}">
+                                    <a class="dropdown-item" href="{{ route('edit', ['product' => $product->id]) }}">
                                         <i class="fas fa-pen mr-1"></i>積読を更新する
                                     </a>
                                     <div class="dropdown-divider"></div>
@@ -54,7 +53,7 @@
                                             </span>
                                         </button>
                                     </div>
-                                    <form method="POST" action="{{ route('destroy', ['product' => $product]) }}">
+                                    <form method="POST" action="{{ route('destroy', ['product' => $product->id]) }}">
                                         @csrf
                                         <div class="modal-body">
                                             {{ $product->title }}を削除します。よろしいですか？
@@ -71,13 +70,14 @@
                     </div>
                 </div>
             </div>
-            @endforeach
         @endforeach
     </div>
 </div>
+
 <div class="text-center" style="width: 200px; margin: 50px auto;">
     {{ $products->links() }}
 </div>
+
 @endauth
 
 @guest

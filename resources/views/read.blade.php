@@ -14,7 +14,7 @@
                         <div class="card-body d-flex flex-row flex-wrap">
                             <div class="left mr-4">
                                 @if(!empty($product->image))
-                                    <div class="image-wrapper"><img class="book-image" src="{{ asset('storage/'.$product->image) }}"></div>
+                                    <div class="image-wrapper"><img class="book-image" src="{{ $product->image }}"></div>
                                 @else
                                     <div class="image-wrapper"><img class="book-image" src="{{ asset('images/dummy.png') }}"></div>
                                 @endif
@@ -37,7 +37,7 @@
                                     </button>
                                 </a>
                                 <div class="dropdown-menu dropdown-menu-right">
-                                    <a class="dropdown-item" href="{{ route('editRead', ['product' => $product]) }}">
+                                    <a class="dropdown-item" href="{{ route('editRead', ['product' => $product->id]) }}">
                                         <i class="fas fa-pen mr-1"></i>積読を更新する
                                     </a>
                                     <div class="dropdown-divider"></div>
@@ -59,7 +59,7 @@
                                                 </span>
                                             </button>
                                         </div>
-                                        <form method="POST" action="{{ route('destroyRead', ['product' => $product]) }}">
+                                        <form method="POST" action="{{ route('destroyRead', ['product' => $product->id]) }}">
                                             @csrf
                                             <div class="modal-body">
                                                 {{ $product->title }}を削除します。よろしいですか？

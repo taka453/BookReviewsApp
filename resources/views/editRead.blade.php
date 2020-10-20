@@ -22,15 +22,15 @@
                         <div class="card-body">
                             <div class="form-group" style="padding: 5px">
                                 <label>タイトル</label>
-                                <input type="text" class="form-control" value="{{ $product->title }}" name="title">
+                                <br>
+                                {{ $product->title }}
                             </div>
                             <div class="form-group" style="padding: 5px">
                                 <label>金額</label>
                                 <input type="text" class="form-control" value="{{ $product->fee }}" name="fee">
                             </div>
                             <div class="form-group" style="padding: 5px">
-                                <label for="file1">再度画像を選択してください</label>
-                                <input type="file" id="file1" name="image" class="form-control-file">
+                                <div class="image-wrapper"><img class="book-image" src="{{ $product->image }}"></div>
                             </div>
                             <div class="form-group" style="padding: 5px">
                                 <textarea name="comment" id="" cols="60" rows="10">{{ $product->comment }}</textarea>

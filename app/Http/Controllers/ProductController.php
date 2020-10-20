@@ -17,18 +17,26 @@ class ProductController extends Controller
     {
         $user_id = Auth::id();
 
-        $items = null;
+        $item = null;
         $data = [];
 
         $products = Product::where('status', 1)->where('user_id', $user_id)->whereNull('comment')->orderBy('created_at', 'DESC')->paginate(3);
         foreach($products as $product) {
             $item = $product->api_id;
             $url = 'https://www.googleapis.com/books/v1/volumes?q=' . $item . '&country=JP&tbm=bks';
-            $body = file_get_contents($url);
+            $client = new Client;
+            $response = $client->request("GET", $url);
+            $body = $response->getBody();
             $bodyArray = json_decode($body, true);
-            $items = $bodyArray['items'];
+            $item = $bodyArray['items'];
+            // dd($item);
+            $product['title'] = $item[0]['volumeInfo']['title'];
+            $product['image'] = $item[0]['volumeInfo']['imageLinks']['thumbnail'];
+            //product fee title id imageLink productにimageを追加 itemsにidで分ける productのimageLink
+
+            // dd($products);
         }
-        return view('product', compact('products', 'items'));
+        return view('product', compact('products'));
     }
 
     public function create(Request $request)
@@ -81,6 +89,15 @@ class ProductController extends Controller
     {
         $products = $request->query('product');
         $product = Product::find($products);
+        $item = $product->api_id;
+        $url = 'https://www.googleapis.com/books/v1/volumes?q=' . $item . '&country=JP&tbm=bks';
+        $client = new Client;
+        $response = $client->request("GET", $url);
+        $body = $response->getBody();
+        $bodyArray = json_decode($body, true);
+        $item = $bodyArray['items'];
+        $product['title'] = $item[0]['volumeInfo']['title'];
+        $product['image'] = $item[0]['volumeInfo']['imageLinks']['thumbnail'];
         return view('edit', compact('product'));
     }
 
@@ -88,16 +105,11 @@ class ProductController extends Controller
     {
         $validatedData = $request->validate([
             'id' => 'required',
-            'title' => 'required|max: 255',
             'fee' => 'required',
-            'image' => 'mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
 
         $product = Product::find($validatedData['id']);
-        $product->title = $validatedData['title'];
         $product->fee = $validatedData['fee'];
-        Storage::delete('/public/' . $product->image);
-        $product->image = $request->file('image')->store('images', ['disk' => 'public']);
 
         $product->save();
         return redirect('/');
@@ -106,6 +118,15 @@ class ProductController extends Controller
     {
         $products = $request->query('product');
         $product = Product::find($products);
+        $item = $product->api_id;
+        $url = 'https://www.googleapis.com/books/v1/volumes?q=' . $item . '&country=JP&tbm=bks';
+        $client = new Client;
+        $response = $client->request("GET", $url);
+        $body = $response->getBody();
+        $bodyArray = json_decode($body, true);
+        $item = $bodyArray['items'];
+        $product['title'] = $item[0]['volumeInfo']['title'];
+        $product['image'] = $item[0]['volumeInfo']['imageLinks']['thumbnail'];
         return view('editRead', compact('product'));
     }
 
@@ -113,21 +134,14 @@ class ProductController extends Controller
     {
         $validatedData = $request->validate([
             'id' => 'required',
-            'title' => 'required|max: 255',
             'fee' => 'required',
-            'image' => 'mimes:jpeg,png,jpg,gif,svg|max:2048',
             'comment' => 'required|max: 500',
         ]);
 
         $product = Product::find($validatedData['id']);
-        $product->title = $validatedData['title'];
         $product->fee = $validatedData['fee'];
         $product->comment = $validatedData['comment'];
-        Storage::delete('/public/' . $product->image);
-        $product->image = $request->file('image')->store('images', ['disk' => 'public']);
-
         $product->save();
-
         return redirect('/read');
     }
 
@@ -159,6 +173,18 @@ class ProductController extends Controller
     {
         $user_id = Auth::id();
         $products = Product::where('user_id', 1)->where('user_id', $user_id)->whereNotNull ('comment')->orderBy('updated_at', 'DESC')->paginate(3);
+        foreach($products as $product) {
+            $item = $product->api_id;
+            $url = 'https://www.googleapis.com/books/v1/volumes?q=' . $item . '&country=JP&tbm=bks';
+            $client = new Client;
+            $response = $client->request("GET", $url);
+            $body = $response->getBody();
+            $bodyArray = json_decode($body, true);
+            $item = $bodyArray['items'];
+            // dd($item);
+            $product['title'] = $item[0]['volumeInfo']['title'];
+            $product['image'] = $item[0]['volumeInfo']['imageLinks']['thumbnail'];
+        }
         return view('read', compact('products'));
     }
 
@@ -166,7 +192,6 @@ class ProductController extends Controller
     {
         $products = $request->query('product');
         $product = Product::find($products);
-        Storage::delete('/public/' . $product->image);
         $product->delete();
         return redirect('/');
     }
@@ -175,7 +200,6 @@ class ProductController extends Controller
     {
         $products = $request->query('product');
         $product = Product::find($products);
-        Storage::delete('/public/' . $product->image);
         $product->delete();
         return redirect('/read');
     }
