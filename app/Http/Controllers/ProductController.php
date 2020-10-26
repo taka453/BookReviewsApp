@@ -48,7 +48,7 @@ class ProductController extends Controller
         if(!empty($request->keyword))
         {
             $title = urlencode($request->keyword);
-            $url = 'https://www.googleapis.com/books/v1/volumes?q=' . $title . '&maxResults=1&country=JP&tbm=bks';
+            $url = 'https://www.googleapis.com/books/v1/volumes?q=' . $title . '&country=JP&tbm=bks';
             $client = new Client;
             $response = $client->request("GET", $url);
             $body = $response->getBody();

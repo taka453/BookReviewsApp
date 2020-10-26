@@ -27,9 +27,9 @@
                     </div>
                 </div>
                 <br>
-                <form method='POST' action="{{route('store')}}" enctype="multipart/form-data">
+                @foreach((array) $items as $item)
+                <form method='POST' action="{{route('store')}}" id="myform" enctype="multipart/form-data">
                     @csrf
-                    @foreach((array) $items as $item)
                     <div class="card">
                         <div class="card-body">
                             <div class="form-group">
@@ -47,14 +47,20 @@
                                 <img src="{{ $item['volumeInfo']['imageLinks']['thumbnail']}}">
                             </div>
                             <input type="hidden" name="api_id" value="{{ $item['id'] }}">
-                            <input type="submit" class="btn btn-primary" value="積読を登録する">
+                            <button name="jsBtn" class="btn btn-primary">積読を登録する</button>
                         </div>
                     </div>
-                    @endforeach
                 </form>
+                @endforeach
                     @endif
             </div>
         </div>
     </div>
 </div>
+<script>
+    document.myform.jsBtn.addEventListener('click', function() {
+        document.myform.submit();
+    });
+</script>
 @endsection
+
