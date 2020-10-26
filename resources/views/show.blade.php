@@ -5,7 +5,7 @@
 @auth
 <div class="container-fluid">
     <div class="mt-5 col-md-5" style="margin: 0px auto">
-        <div class="card" style="height: 40vh;">
+        <div class="card" style="min-height: 400px;">
             <div class="card-body">
                 <div class="text-center" style="margin-top: 100px;">
                     <p style="font-size: 20px; font-weight: bold;">あなたの積読金額は・・・</p>
