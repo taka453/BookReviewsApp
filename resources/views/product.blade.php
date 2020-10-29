@@ -10,7 +10,7 @@
 <div class="container-fluid mt-3">
     <div class="mx-auto" style="max-width: 1200px">
         @foreach($products as $product)
-            <div class="" style="margin: 0 auto; width: 650px;">
+            <div class="" style="margin: 0 auto; max-width: 800px;">
                 <div class="card mb">
                     <div class="card-body d-flex flex-row flex-wrap">
                         <div class="left mr-4">
