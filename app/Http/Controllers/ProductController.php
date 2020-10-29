@@ -71,7 +71,7 @@ class ProductController extends Controller
     {
         $validatedData = $request->validate([
             'api_id' => 'required',
-            'fee' => 'required | integer | min:1',
+            'fee' => 'required | integer | min:0',
         ]);
 
         $data = [
@@ -106,7 +106,7 @@ class ProductController extends Controller
     {
         $validatedData = $request->validate([
             'id' => 'required',
-            'fee' => 'required | integer | min:1',
+            'fee' => 'required | integer | min:0',
         ]);
 
         $product = Product::find($validatedData['id']);
@@ -135,7 +135,7 @@ class ProductController extends Controller
     {
         $validatedData = $request->validate([
             'id' => 'required',
-            'fee' => 'required | integer | min:1',
+            'fee' => 'required | integer | min:0',
             'comment' => 'required|max: 500',
         ]);
 
