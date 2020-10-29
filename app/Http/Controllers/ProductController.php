@@ -71,7 +71,7 @@ class ProductController extends Controller
     {
         $validatedData = $request->validate([
             'api_id' => 'required',
-            'fee' => 'required',
+            'fee' => 'required | integer | min:1',
         ]);
 
         $data = [
@@ -81,8 +81,9 @@ class ProductController extends Controller
         ];
 
         Product::insert($data);
-
         return redirect('/');
+
+
     }
 
     public function edit(Request $request, Product $product)
@@ -105,7 +106,7 @@ class ProductController extends Controller
     {
         $validatedData = $request->validate([
             'id' => 'required',
-            'fee' => 'required',
+            'fee' => 'required | integer | min:1',
         ]);
 
         $product = Product::find($validatedData['id']);
@@ -134,7 +135,7 @@ class ProductController extends Controller
     {
         $validatedData = $request->validate([
             'id' => 'required',
-            'fee' => 'required',
+            'fee' => 'required | integer | min:1',
             'comment' => 'required|max: 500',
         ]);
 
